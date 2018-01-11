@@ -34,7 +34,7 @@ setup(
     version='20121119',
     description = "The Diff Match and Patch libraries offer robust algorithms to perform the operations required for synchronizing plain text.",
     long_description = read('README.rst') + "\n\n" + read("CHANGES.rst"),
-    packages = ['diff_match_patch'],
+    packages = ['dmp'],
     package_dir = {'': subdir},
     ext_modules = ext_modules,
     cmdclass={'build_ext': _build_ext},
