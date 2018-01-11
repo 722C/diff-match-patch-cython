@@ -20,13 +20,13 @@ else:
 
 if have_cython:
     ext_modules = [
-        Extension('diff_match_patch/diff_match_patch',
-                  [os.path.join(subdir, 'diff_match_patch/diff_match_patch.pyx')])
+        Extension('dmp/diff_match_patch',
+                  [os.path.join(subdir, 'dmp/diff_match_patch.pyx')])
     ]
 else:
     ext_modules = [
-        Extension('diff_match_patch/diff_match_patch',
-                  [os.path.join(subdir, 'diff_match_patch/diff_match_patch.c')])
+        Extension('dmp/diff_match_patch',
+                  [os.path.join(subdir, 'dmp/diff_match_patch.c')])
     ]
 
 setup(
