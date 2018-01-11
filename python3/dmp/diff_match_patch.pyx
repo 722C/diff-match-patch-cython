@@ -32,7 +32,7 @@ import sys
 import time
 import urllib.parse
 
-class diff_match_patch:
+class DiffMatchPatch:
   """Class containing the diff, match and patch methods.
 
   Also contains the behaviour settings.
@@ -1859,7 +1859,7 @@ class diff_match_patch:
     return patches
 
 
-class patch_obj:
+class PatchObj:
   """Class representing one patch operation.
   """
 
