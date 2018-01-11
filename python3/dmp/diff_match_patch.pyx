@@ -39,7 +39,7 @@ class DiffMatchPatch:
   """
 
   def __init__(self):
-    """Inits a diff_match_patch object with default settings.
+    """Inits a DiffMatchPatch object with default settings.
     Redefine these in your program to override the defaults.
     """
 
@@ -1460,7 +1460,7 @@ class DiffMatchPatch:
     if not diffs:
       return []  # Get rid of the None case.
     patches = []
-    patch = patch_obj()
+    patch = PatchObj()
     char_count1 = 0  # Number of characters into the text1 string.
     char_count2 = 0  # Number of characters into the text2 string.
     prepatch_text = text1  # Recreate the patches to determine context info.
@@ -1497,7 +1497,7 @@ class DiffMatchPatch:
         if len(patch.diffs) != 0:
           self.patch_addContext(patch, prepatch_text)
           patches.append(patch)
-          patch = patch_obj()
+          patch = PatchObj()
           # Unlike Unidiff, our patch lists have a rolling context.
           # http://code.google.com/p/google-diff-match-patch/wiki/Unidiff
           # Update prepatch text & pos to reflect the application of the
@@ -1528,7 +1528,7 @@ class DiffMatchPatch:
     """
     patchesCopy = []
     for patch in patches:
-      patchCopy = patch_obj()
+      patchCopy = PatchObj()
       # No need to deep copy the tuples since they are immutable.
       patchCopy.diffs = patch.diffs[:]
       patchCopy.start1 = patch.start1
@@ -1709,7 +1709,7 @@ class DiffMatchPatch:
       precontext = ''
       while len(bigpatch.diffs) != 0:
         # Create one of several smaller patches.
-        patch = patch_obj()
+        patch = PatchObj()
         empty = True
         patch.start1 = start1 - len(precontext)
         patch.start2 = start2 - len(precontext)
@@ -1807,7 +1807,7 @@ class DiffMatchPatch:
       m = re.match("^@@ -(\d+),?(\d*) \+(\d+),?(\d*) @@$", text[0])
       if not m:
         raise ValueError("Invalid patch string: " + text[0])
-      patch = patch_obj()
+      patch = PatchObj()
       patches.append(patch)
       patch.start1 = int(m.group(1))
       if m.group(2) == '':
@@ -1895,11 +1895,11 @@ class PatchObj:
     text = ["@@ -", coords1, " +", coords2, " @@\n"]
     # Escape the body of the patch with %xx notation.
     for (op, data) in self.diffs:
-      if op == diff_match_patch.DIFF_INSERT:
+      if op == DiffMatchPatch.DIFF_INSERT:
         text.append("+")
-      elif op == diff_match_patch.DIFF_DELETE:
+      elif op == DiffMatchPatch.DIFF_DELETE:
         text.append("-")
-      elif op == diff_match_patch.DIFF_EQUAL:
+      elif op == DiffMatchPatch.DIFF_EQUAL:
         text.append(" ")
       # High ascii will raise UnicodeDecodeError.  Use Unicode instead.
       data = data.encode("utf-8")
